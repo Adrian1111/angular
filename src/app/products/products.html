@@ -1,0 +1,39 @@
+﻿<div id="products" class="col-lg-12  col-lg-offset-3">
+    <h1>Products</h1>
+  <div>Click to edit</div>
+    <div>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let product of products" (click)="clickToEdit(product.productID)">
+              Product id: {{product.productID}}<br> {{product.name}} <br>Price: {{product.price}}<br>{{product.description}}
+              <i class="fa fa-trash" (click)="onRemove(product.productID, $event)"></i>
+              <div *ngIf="clickedUser">
+                <div class="editing" (click)="onEvent($event)" *ngIf="clickedUser.productID == product.productID">
+                Edit:
+                <form>
+                  name:<br>
+                  <input type="text" [(ngModel)]="product.name" name="name"><br>
+                  price:<br>
+                  <input type="number" [(ngModel)]="product.price" name="price"><br>
+                  description:<br>
+                  <input type="text" [(ngModel)]="product.description" name="description"><br>
+                  <input type="submit" (click)="modifyProductSave(product.productID, product.name, product.price, product.description )" value="Submit">
+                </form>
+                </div>
+              </div>
+            </li>
+        </ul>
+    </div>
+    <div>
+      Add new:
+      <form>
+        name:<br>
+        <input type="text"  [(ngModel)]="addProduct.name" name="name"><br>
+        price:<br>
+        <input type="number"  [(ngModel)]="addProduct.price" name="price"><br>
+        description:<br>
+        <input type="text"  [(ngModel)]="addProduct.description" name="description"><br>
+        <input type="submit" (click)="addNewProduct(addProduct.productID, addProduct.name, addProduct.price, addProduct.description )" value="Submit">
+      </form>
+    </div>
+    <p id="logoutLink"><a [routerLink]="['/login']">Logout</a></p>
+</div>
